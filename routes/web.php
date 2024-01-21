@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Stone\CreateController;
+use App\Http\Controllers\Stone\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['namespace' => 'stone'], function() {
+  Route::get('/stone', [IndexController::class, 'index'])->name('stone.index');
+  Route::get('/stone/create', [CreateController::class, 'create'])->name('create.index');
 });
