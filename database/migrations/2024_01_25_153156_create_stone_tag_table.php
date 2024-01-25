@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-  /**
-   * Run the migrations.
-   */
-  public function up(): void
-  {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
     Schema::create('stone_tag', function (Blueprint $table) {
       $table->id();
       $table->unsignedBigInteger('stone_id');
@@ -25,13 +25,13 @@ return new class extends Migration
 
       $table->timestamps();
     });
-  }
+    }
 
-  /**
-   * Reverse the migrations.
-   */
-  public function down(): void
-  {
-    Schema::dropIfExists('stone_tag');
-  }
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('stone_tag');
+    }
 };

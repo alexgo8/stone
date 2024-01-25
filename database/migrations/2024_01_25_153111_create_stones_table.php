@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-  /**
-   * Run the migrations.
-   */
-  public function up(): void
-  {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
     Schema::create('stones', function (Blueprint $table) {
       $table->id();
       $table->string('titel');
@@ -24,13 +24,13 @@ return new class extends Migration
 
       $table->foreign('category_id', 'stone_category_fk')->on('stones')->references('id'); //связь один ко многим много камней из таблицы stone, ссылаются на категорию из таблицы categories
     });
-  }
+    }
 
-  /**
-   * Reverse the migrations.
-   */
-  public function down(): void
-  {
-    Schema::dropIfExists('stones');
-  }
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('stones');
+    }
 };
