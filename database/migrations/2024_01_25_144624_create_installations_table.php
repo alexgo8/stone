@@ -6,22 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('installations', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+  /**
+   * Run the migrations.
+   */
+  public function up(): void
+  {
+    Schema::create('installations', function (Blueprint $table) {
+      $table->id();      
+      $table->string('size');
+      $table->integer('price');
+      $table->unsignedBigInteger('material_id');
+      $table->unsignedBigInteger('size_height')->nullable();
+      $table->unsignedBigInteger('size_width')->nullable();
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('installations');
-    }
+      $table->softDeletes();
+      $table->timestamps();
+    });
+  }
+
+  /**
+   * Reverse the migrations.
+   */
+  public function down(): void
+  {
+    Schema::dropIfExists('installations');
+  }
 };

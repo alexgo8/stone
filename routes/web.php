@@ -1,6 +1,8 @@
 <?php
 
-// use App\Http\Controllers\Category\IndexController as CategoryIndexController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
 
 use App\Http\Controllers\Base\CreateController as BaseCreateController;
 use App\Http\Controllers\Base\DestroyController as BaseDestroyController;
@@ -9,13 +11,6 @@ use App\Http\Controllers\Base\IndexController as BaseIndexController;
 use App\Http\Controllers\Base\ShowController as BaseShowController;
 use App\Http\Controllers\Base\StoreController as BaseStoreController;
 use App\Http\Controllers\Base\UpdateController as BaseUpdateController;
-use App\Http\Controllers\Category\CreateController as CategoryCreateController;
-use App\Http\Controllers\Category\DestroyController as CategoryDestroyController;
-use App\Http\Controllers\Category\EditController as CategoryEditController;
-use App\Http\Controllers\Category\IndexController as CategoryIndexController;
-use App\Http\Controllers\Category\ShowController as CategoryShowController;
-use App\Http\Controllers\Category\StoreController as CategoryStoreController;
-use App\Http\Controllers\Category\UpdateController as CategoryUpdateController;
 use App\Http\Controllers\FlowerGarden\CreateController as FlowerGardenCreateController;
 use App\Http\Controllers\FlowerGarden\DestroyController as FlowerGardenDestroyController;
 use App\Http\Controllers\FlowerGarden\EditController as FlowerGardenEditController;
@@ -23,13 +18,6 @@ use App\Http\Controllers\FlowerGarden\IndexController as FlowerGardenIndexContro
 use App\Http\Controllers\FlowerGarden\ShowController as FlowerGardenShowController;
 use App\Http\Controllers\FlowerGarden\StoreController as FlowerGardenStoreController;
 use App\Http\Controllers\FlowerGarden\UpdateController as FlowerGardenUpdateController;
-use App\Http\Controllers\GroupPortrait\CreateController as GroupPortraitCreateController;
-use App\Http\Controllers\GroupPortrait\DestroyController as GroupPortraitDestroyController;
-use App\Http\Controllers\GroupPortrait\EditController as GroupPortraitEditController;
-use App\Http\Controllers\GroupPortrait\IndexController as GroupPortraitIndexController;
-use App\Http\Controllers\GroupPortrait\ShowController as GroupPortraitShowController;
-use App\Http\Controllers\GroupPortrait\StoreController as GroupPortraitStoreController;
-use App\Http\Controllers\GroupPortrait\UpdateController as GroupPortraitUpdateController;
 use App\Http\Controllers\Installation\CreateController as InstallationCreateController;
 use App\Http\Controllers\Installation\DestroyController as InstallationDestroyController;
 use App\Http\Controllers\Installation\EditController as InstallationEditController;
@@ -37,6 +25,13 @@ use App\Http\Controllers\Installation\IndexController as InstallationIndexContro
 use App\Http\Controllers\Installation\ShowController as InstallationShowController;
 use App\Http\Controllers\Installation\StoreController as InstallationStoreController;
 use App\Http\Controllers\Installation\UpdateController as InstallationUpdateController;
+use App\Http\Controllers\Material\CreateController as MaterialCreateController;
+use App\Http\Controllers\Material\DestroyController as MaterialDestroyController;
+use App\Http\Controllers\Material\EditController as MaterialEditController;
+use App\Http\Controllers\Material\IndexController as MaterialIndexController;
+use App\Http\Controllers\Material\ShowController as MaterialShowController;
+use App\Http\Controllers\Material\StoreController as MaterialStoreController;
+use App\Http\Controllers\Material\UpdateController as MaterialUpdateController;
 use App\Http\Controllers\NameEngraving\CreateController as NameEngravingCreateController;
 use App\Http\Controllers\NameEngraving\DestroyController as NameEngravingDestroyController;
 use App\Http\Controllers\NameEngraving\EditController as NameEngravingEditController;
@@ -51,13 +46,15 @@ use App\Http\Controllers\PortraitEngraving\IndexController as PortraitEngravingI
 use App\Http\Controllers\PortraitEngraving\ShowController as PortraitEngravingShowController;
 use App\Http\Controllers\PortraitEngraving\StoreController as PortraitEngravingStoreController;
 use App\Http\Controllers\PortraitEngraving\UpdateController as PortraitEngravingUpdateController;
-use App\Http\Controllers\Stone\CreateController;
-use App\Http\Controllers\stone\DestroyController;
-use App\Http\Controllers\stone\EditController;
-use App\Http\Controllers\Stone\IndexController;
-use App\Http\Controllers\stone\ShowController;
-use App\Http\Controllers\stone\StoreController;
-use App\Http\Controllers\stone\UpdateController;
+use App\Http\Controllers\Stele\CreateController as SteleCreateController;
+use App\Http\Controllers\Stele\DestroyController as SteleDestroyController;
+use App\Http\Controllers\Stele\EditController as SteleEditController;
+use App\Http\Controllers\Stele\IndexController as SteleIndexController;
+use App\Http\Controllers\Stele\IndexTableController;
+use App\Http\Controllers\Stele\ShowController as SteleShowController;
+use App\Http\Controllers\Stele\StoreController as SteleStoreController;
+use App\Http\Controllers\Stele\UpdateController as SteleUpdateController;
+use App\Http\Controllers\Stele\UpdateTableController as SteleUpdateTableController;
 use App\Http\Controllers\Tomb\CreateController as TombCreateController;
 use App\Http\Controllers\Tomb\DestroyController as TombDestroyController;
 use App\Http\Controllers\Tomb\EditController as TombEditController;
@@ -65,7 +62,7 @@ use App\Http\Controllers\Tomb\IndexController as TombIndexController;
 use App\Http\Controllers\Tomb\ShowController as TombShowController;
 use App\Http\Controllers\Tomb\StoreController as TombStoreController;
 use App\Http\Controllers\Tomb\UpdateController as TombUpdateController;
-use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -78,24 +75,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'Stone'], function() {
-  Route::get('/stones', [IndexController::class, 'index'])->name('stones.index');
-  Route::get('/stones/create', [CreateController::class, 'create'])->name('stones.create');
-  Route::post('/stones', [StoreController::class, 'store'])->name('stones.store');
-  Route::get('/stones/{stone}', [ShowController::class, 'show'])->name('stones.show');
-  Route::get('/stones/{stone}/edit', [EditController::class, 'edit'])->name('stones.edit');
-  Route::patch('/stones/{stone}', [UpdateController::class, 'update'])->name('stones.update');
-  Route::delete('/stones/{stone}', [DestroyController::class, 'destroy'])->name('stones.destroy');
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::group(['namespace' => 'Category'], function () {
-  Route::get('/categories', [CategoryIndexController::class, 'index'])->name('categories.index');
-  Route::get('/categories/create', [CategoryCreateController::class, 'create'])->name('categories.create');
-  Route::post('/categories', [CategoryStoreController::class, 'store'])->name('categories.store');
-  Route::get('/categories/{category}', [CategoryShowController::class, 'show'])->name('categories.show');
-  Route::get('/categories/{category}/edit', [CategoryEditController::class, 'edit'])->name('categories.edit');
-  Route::patch('/categories/{category}', [CategoryUpdateController::class, 'update'])->name('categories.update');
-  Route::delete('/categories/{category}', [CategoryDestroyController::class, 'destroy'])->name('categories.destroy');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
+
+
+Route::group(['namespace' => 'Stele'], function() {
+  Route::get('/steles', [SteleIndexController::class, 'index'])->name('steles.index');
+  Route::get('/steles-table', [IndexTableController::class, 'index'])->name('steles-table.index');
+  Route::get('/steles/create', [SteleCreateController::class, 'create'])->name('steles.create');
+  Route::post('/steles', [SteleStoreController::class, 'store'])->name('steles.store');
+  Route::get('/steles/{stele}', [SteleShowController::class, 'show'])->name('steles.show');
+  Route::get('/steles/{stele}/edit', [SteleEditController::class, 'edit'])->name('steles.edit');
+  Route::patch('/steles/{stele}', [SteleUpdateController::class, 'update'])->name('steles.update');
+  Route::patch('/steles-table', [SteleUpdateTableController::class, 'update'])->name('steles-table.update');
+  Route::delete('/steles/{stele}', [SteleDestroyController::class, 'destroy'])->name('steles.destroy');
+});
+
+Route::group(['namespace' => 'material'], function () {
+  Route::get('/materials', [MaterialIndexController::class, 'index'])->name('materials.index');
+  Route::get('/materials/create', [MaterialCreateController::class, 'create'])->name('materials.create');
+  Route::post('/materials', [MaterialStoreController::class, 'store'])->name('materials.store');
+  Route::get('/materials/{material}', [MaterialShowController::class, 'show'])->name('materials.show');
+  Route::get('/materials/{material}/edit', [MaterialEditController::class, 'edit'])->name('materials.edit');
+  Route::patch('/materials/{material}', [MaterialUpdateController::class, 'update'])->name('materials.update');
+  Route::delete('/materials/{material}', [MaterialDestroyController::class, 'destroy'])->name('materials.destroy');
 });
 
 Route::group(['namespace' => 'Base'], function () {
@@ -156,14 +173,4 @@ Route::group(['namespace' => 'NameEngraving'], function () {
   Route::get('/name-engravings/{name-engraving}/edit', [NameEngravingEditController::class, 'edit'])->name('name-engravings.edit');
   Route::patch('/name-engravings/{name-engraving}', [NameEngravingUpdateController::class, 'update'])->name('name-engravings.update');
   Route::delete('/name-engravings/{name-engraving}', [NameEngravingDestroyController::class, 'destroy'])->name('name-engravings.destroy');
-});
-
-Route::group(['namespace' => 'GroupPortrait'], function () {
-  Route::get('/group-portraits', [GroupPortraitIndexController::class, 'index'])->name('group-portraits.index');
-  Route::get('/group-portraits/create', [GroupPortraitCreateController::class, 'create'])->name('group-portraits.create');
-  Route::post('/group-portraits', [GroupPortraitStoreController::class, 'store'])->name('group-portraits.store');
-  Route::get('/group-portraits/{group-portrait}', [GroupPortraitShowController::class, 'show'])->name('group-portraits.show');
-  Route::get('/group-portraits/{group-portrait}/edit', [GroupPortraitEditController::class, 'edit'])->name('group-portraits.edit');
-  Route::patch('/group-portraits/{group-portrait}', [GroupPortraitUpdateController::class, 'update'])->name('group-portraits.update');
-  Route::delete('/group-portraits/{group-portrait}', [GroupPortraitDestroyController::class, 'destroy'])->name('group-portraits.destroy');
 });

@@ -12,7 +12,15 @@ return new class extends Migration
     public function up(): void
     {
     Schema::create('portrait-engravings', function (Blueprint $table) {
-      $table->id();
+      $table->id();      
+      $table->string('size');
+      $table->integer('price');      
+      $table->unsignedBigInteger('material_id');
+      $table->string('method_id');
+      $table->unsignedBigInteger('size_height')->nullable();
+      $table->unsignedBigInteger('size_width')->nullable();
+
+      $table->softDeletes();
       $table->timestamps();
     });
     }

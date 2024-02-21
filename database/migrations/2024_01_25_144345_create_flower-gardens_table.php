@@ -13,6 +13,14 @@ return new class extends Migration
     {
     Schema::create('flower-gardens', function (Blueprint $table) {
       $table->id();
+      $table->string('size');
+      $table->integer('price');
+      $table->unsignedBigInteger('material_id');
+      $table->unsignedBigInteger('size_height')->nullable();
+      $table->unsignedBigInteger('size_width')->nullable();
+      $table->unsignedBigInteger('size_thickness')->nullable();
+
+      $table->softDeletes();
       $table->timestamps();
     });
     }

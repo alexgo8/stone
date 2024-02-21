@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('stone_tag', function (Blueprint $table) {
+    Schema::create('stele_tag', function (Blueprint $table) {
       $table->id();
-      $table->unsignedBigInteger('stone_id');
+      $table->unsignedBigInteger('stele_id');
       $table->unsignedBigInteger('tag_id');
 
-      $table->index('stone_id', 'stone_tag_stone_idx');
-      $table->index('tag_id', 'stone_tag_tag_idx');
+      $table->index('stele_id', 'stele_tag_stele_idx');
+      $table->index('tag_id', 'stele_tag_tag_idx');
 
-      $table->foreign('stone_id', 'stone_tag_note_fk')->on('stones')->references('id');
-      $table->foreign('tag_id', 'stone_tag_tag_fk')->on('tags')->references('id');
+      $table->foreign('stele_id', 'stele_tag_note_fk')->on('steles')->references('id');
+      $table->foreign('tag_id', 'stele_tag_tag_fk')->on('tags')->references('id');
 
 
       $table->timestamps();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stone_tag');
+        Schema::dropIfExists('stele_tag');
     }
 };
