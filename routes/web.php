@@ -50,6 +50,8 @@ use App\Http\Controllers\Stele\CreateController as SteleCreateController;
 use App\Http\Controllers\Stele\DestroyController as SteleDestroyController;
 use App\Http\Controllers\Stele\EditController as SteleEditController;
 use App\Http\Controllers\Stele\IndexController as SteleIndexController;
+use App\Http\Controllers\Stele\CreateFormTwoController as SteleCreateFormTwoController;
+use App\Http\Controllers\Stele\EditFormTwoController as SteleEditFormTwoController;
 use App\Http\Controllers\Stele\IndexTableController;
 use App\Http\Controllers\Stele\ShowController as SteleShowController;
 use App\Http\Controllers\Stele\StoreController as SteleStoreController;
@@ -76,30 +78,32 @@ use App\Http\Controllers\Tomb\UpdateController as TombUpdateController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+  return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+  Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+  Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+  Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 
-Route::group(['namespace' => 'Stele'], function() {
+Route::group(['namespace' => 'Stele'], function () {
   Route::get('/steles', [SteleIndexController::class, 'index'])->name('steles.index');
   Route::get('/steles-table', [IndexTableController::class, 'index'])->name('steles-table.index');
   Route::get('/steles/create', [SteleCreateController::class, 'create'])->name('steles.create');
+  Route::get('/steles/create-form-two', [SteleCreateFormTwoController::class, 'create'])->name('steles.create-form-two');
   Route::post('/steles', [SteleStoreController::class, 'store'])->name('steles.store');
   Route::get('/steles/{stele}', [SteleShowController::class, 'show'])->name('steles.show');
   Route::get('/steles/{stele}/edit', [SteleEditController::class, 'edit'])->name('steles.edit');
+  Route::get('/steles/stele-form-two/{stele}/edit', [SteleEditFormTwoController::class, 'edit'])->name('steles.edit-form-two');
   Route::patch('/steles/{stele}', [SteleUpdateController::class, 'update'])->name('steles.update');
   Route::patch('/steles-table', [SteleUpdateTableController::class, 'update'])->name('steles-table.update');
   Route::delete('/steles/{stele}', [SteleDestroyController::class, 'destroy'])->name('steles.destroy');
@@ -116,13 +120,13 @@ Route::group(['namespace' => 'material'], function () {
 });
 
 Route::group(['namespace' => 'Base'], function () {
-  Route::get('/basis', [BaseIndexController::class, 'index'])->name('basis.index');
-  Route::get('/basis/create', [BaseCreateController::class, 'create'])->name('basis.create');
-  Route::post('/basis', [BaseStoreController::class, 'store'])->name('basis.store');
-  Route::get('/basis/{base}', [BaseShowController::class, 'show'])->name('basis.show');
-  Route::get('/basis/{base}/edit', [BaseEditController::class, 'edit'])->name('basis.edit');
-  Route::patch('/basis/{base}', [BaseUpdateController::class, 'update'])->name('basis.update');
-  Route::delete('/basis/{base}', [BaseDestroyController::class, 'destroy'])->name('basis.destroy');
+  Route::get('/bases', [BaseIndexController::class, 'index'])->name('bases.index');
+  Route::get('/bases/create', [BaseCreateController::class, 'create'])->name('bases.create');
+  Route::post('/bases', [BaseStoreController::class, 'store'])->name('bases.store');
+  Route::get('/bases/{base}', [BaseShowController::class, 'show'])->name('bases.show');
+  Route::get('/bases/{base}/edit', [BaseEditController::class, 'edit'])->name('bases.edit');
+  Route::patch('/bases/{base}', [BaseUpdateController::class, 'update'])->name('bases.update');
+  Route::delete('/bases/{base}', [BaseDestroyController::class, 'destroy'])->name('bases.destroy');
 });
 
 Route::group(['namespace' => 'FlowerGarden'], function () {

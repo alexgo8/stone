@@ -14,6 +14,6 @@ class Tag extends Model
 
   public function stones()
   {
-    return $this->belongsToMany(Stone::class, 'stone_tag', 'tag_id', 'stone_id');
+    return $this->belongsToMany(Stele::class, 'stone_tag', 'tag_id', 'stele_id');
   }
 }

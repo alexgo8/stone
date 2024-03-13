@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
       EngravingMethodSeeder::class,
       SteleSeeder::class,
       RotationSeeder::class,
-      BaseSeeder::class
+      BaseSeeder::class,
+      SteleBaseSeeder::class
     ]);
 
 

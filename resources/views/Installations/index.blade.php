@@ -4,29 +4,30 @@
 @endsection
 @section('installations.body')
   <div>
-    <div>
-      <form action="{{ route('installations.index') }}" method="get">
+
+    <form action="{{ route('installations.index') }}" method="get">
+      <div>
         <input type="text" name="search_string"
           @if (isset($_GET['search_string'])) value="{{ $_GET['search_string'] }}" @endif id="search_string">
-          <label for="search_string">поиск</label>
-    </div>
+        <label for="search_string">поиск</label>
+      </div>
 
-    <div>
-      <select name="material" id="material">
-        <option value="0">Все</option>
-        @foreach ($materials as $material)
-          <option value="{{ $material->id }}"
-            @if (isset($_GET['material'])) @if ($_GET['material'] == $material->id)
+      <div>
+        <select name="material" id="material">
+          <option value="0">Все</option>
+          @foreach ($materials as $material)
+            <option value="{{ $material->id }}"
+              @if (isset($_GET['material'])) @if ($_GET['material'] == $material->id)
                     @selected(true) @endif
-            @endif>{{ $material->name }}</option>
-        @endforeach
-      </select>
-      <label for="material">Категория</label>
-    </div>   
+              @endif>{{ $material->name }}</option>
+          @endforeach
+        </select>
+        <label for="material">Категория</label>
+      </div>
 
-    <div>
-      <button>Применить</button>
-    </div>
+      <div>
+        <button>Применить</button>
+      </div>
     </form>
   </div>
   <div>
@@ -58,6 +59,6 @@
   </div>
 
   <div>
-  {{$installations->withQueryString()->links('vendor.pagination.bootstrap-4') }}
-</div>
+    {{ $installations->withQueryString()->links('vendor.pagination.bootstrap-4') }}
+  </div>
 @endsection
